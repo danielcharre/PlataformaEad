@@ -1,0 +1,18 @@
+<h2>Aulas do Curso (Admin)</h2>
+
+<a href="/admin/curso/aula/nova?id=<?= $this->view->curso_id ?>">
+    <button>Adicionar Nova Aula</button>
+</a>
+
+<ul>
+    <?php foreach ($this->view->aulas as $aula): ?>
+        <li>
+            <strong><?= $aula['titulo'] ?></strong> - Ordem: <?= $aula['ordem'] ?>
+            <p><?= $aula['descricao'] ?></p>
+
+            <a href="/admin/curso/aula/editar?id=<?= $aula['id'] ?>&curso=<?= $this->view->curso_id ?>">
+                <button style="margin-top: 5px;">Editar</button>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>

@@ -1,0 +1,29 @@
+<h2>Aulas do Curso</h2>
+
+<p>Progresso: <?= $this->view->progresso ?>%</p>
+<div style="background: #ddd; width: 100%; height: 20px; border-radius: 5px; margin-bottom: 20px;">
+    <div style="background: #4caf50; width: <?= $this->view->progresso ?>%; height: 100%; border-radius: 5px;"></div>
+</div>
+
+<?php if (empty($this->view->aulas)): ?>
+    <p>Este curso ainda não possui aulas cadastradas.</p>
+<?php else: ?>
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+        <?php foreach ($this->view->aulas as $aula): ?>
+            <div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background: #fff;">
+                <h3>
+                    <?= $aula['titulo'] ?>
+                    <?php if (in_array($aula['id'], $this->view->aulas_vistas)): ?>
+                        <span style="color: green; font-size: 14px;">✅ Aula assistida</span>
+                    <?php endif; ?>
+                </h3>
+                <p><?= $aula['descricao'] ?></p>
+
+                <?php if (!empty($aula['video_url'])): ?>
+                    <a href="<?= $aula['video_url'] ?>" target="_blank" style="margin-right: 10px;">▶ Assistir vídeo</a>
+                    <a href="/painel/assistir?id=<?= $aula['id'] ?>&curso=<?= $this->view->curso_id ?>" style="color: #28a745;">Marcar como assistida</a>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

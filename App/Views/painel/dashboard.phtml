@@ -1,0 +1,47 @@
+<h2>Bem-vindo, <?= $this->view->nome_aluno ?> 👋</h2>
+
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 500px; margin-top: 30px;">
+
+    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background: #fff;">
+        <h3>📚 Cursos matriculados</h3>
+        <p><?= $this->view->total_cursos ?> curso(s)</p>
+    </div>
+
+    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background: #fff;">
+        <h3>🎯 Progresso Geral</h3>
+        <p><?= $this->view->progresso_geral ?>%</p>
+        <div style="background: #ddd; height: 20px; border-radius: 5px;">
+            <div style="background: #007bff; width: <?= $this->view->progresso_geral ?>%; height: 100%; border-radius: 5px;"></div>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="/painel/cursos"><button style="padding: 10px 20px;">Ver cursos</button></a>
+        <a href="/painel/meuscursos"><button style="padding: 10px 20px;">Meus cursos</button></a>
+        <a href="/sair"><button style="padding: 10px 20px; background: red; color: white;">Sair</button></a>
+    </div>
+
+    <?php if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'admin'): ?>
+        <div style="margin-top: 20px; border: 1px solid #aaa; padding: 16px; border-radius: 8px;">
+            <h3>🔧 Área Administrativa</h3>
+
+            <a href="/admin/curso/novo">
+                <button style="padding: 10px 20px;">Cadastrar Novo Curso</button>
+            </a>
+
+            <?php if (!empty($this->view->cursos_admin)): ?>
+                <h4 style="margin-top: 15px;">Gerenciar Aulas dos Cursos:</h4>
+                <ul>
+                    <?php foreach ($this->view->cursos_admin as $curso): ?>
+                        <li style="margin-bottom: 10px;">
+                            <?= $curso['titulo'] ?> —
+                            <a href="/admin/curso/aulas?id=<?= $curso['id'] ?>">
+                                <button style="padding: 5px 10px;">Gerenciar Aulas</button>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>

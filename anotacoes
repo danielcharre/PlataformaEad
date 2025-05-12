@@ -1,0 +1,88 @@
+Pesquisar sobre 
+Padrão de projeto (Desing Patter)
+by GoF (Gang of Four)
+
+-------------------------------------------------------------------------------------------------------------------
+Quando estamos trabalhando com desenvolvimento web temos dois ascptos que devemos levar em consideração, são eles:
+- Requisitos funcionais 
+    Recursos da aplicação em si, ou seja, ligados diretamente as funcionalidades da aplicação.
+- Requisitos não funcionais
+    Recursos que não estão diretamente relacionados com as funcionalidades da aplicação.
+-------------------------------------------------------------------------------------------------------------------
+Model -> Camada de banco de dados e regras de negócio
+View -> Exibição dos dados (html, xml, json)
+Controller -> recebe todas as requisições e controla o que deve acontecer e quando 
+-------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
+Dentro do diretório C: criar uma pasta chamada projetos/miniframework
+    Dentro criar um diretorio chamado App que vai ter toda estrutura MVC
+    Abaixo u diretório chamado Public que vai conter todo script publico da aplicação  
+    
+-------------------------------------------------------------------------------------------------------------------
+Configurar variável de ambiente 
+- meu computador 
+- clique botão direito propiedades
+- configurações avançadas do sistema
+- aba avançado
+- variáveis de ambiente 
+- clicar na variáveis Path
+incluir o caminho do php C:\xampp\php
+feito isso o php pode ser reconhecido em qualquer lugar do sistema
+
+-------------------------------------------------------------------------------------------------------------------
+Utilizar o servidor embutido do php
+    navegue até a pasta do projeto pelo CMD
+    e utlize o comando php -S localhost:8080
+    com isso iniciamos o servidor embutido do php
+    obs: porta 8080 foi escolhida, mas podia ser 8081, 8093 e etc..
+-------------------------------------------------------------------------------------------------------------------
+Composer
+Instalar Composer no projeto
+criar na raiz do projeto arquivo chamado 
+composer.json
+colocar o código Abaixo
+{
+    "name": "miniframework",
+    "require": {
+        "php": ">= 7.0"
+    },
+    "authors": [
+        {
+            "name": "Daniel Charrê",
+            "email": "desenvolvimentophpteste@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "MF\\": "vendor/MF/"
+        }
+    }
+}
+
+depois no cmd no direito do projeto composer.phar install
+-------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
+Route 
+explicação sobre a classe Run 
+public function run($url ex: aqui receber /sobre_nos) {
+
+
+            
+            foreach($this->getRoutes() as $key => $route){
+                if(/sobre_nos == /sobre_nos) {
+                    $class = "App\\Controllers\\". ucfirst($route['controller']);
+
+                    $controller = new $class;
+
+                    $action = $route['action'];
+                    
+                    $controller->$action();
+                }
+            }
+        }
+-------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,16 @@
+<div class="container">
+    <h2><?= $this->view->aula['titulo'] ?></h2>
+
+    <p><?= $this->view->aula['descricao'] ?></p>
+
+    <?php if (!empty($this->view->aula['video_url'])): ?>
+        <div style="margin: 20px 0;">
+            <iframe width="100%" height="400" src="<?= $this->view->aula['video_url'] ?>" 
+                frameborder="0" allowfullscreen></iframe>
+        </div>
+    <?php else: ?>
+        <p>Esta aula ainda não possui vídeo disponível.</p>
+    <?php endif; ?>
+
+    <a href="/painel/curso?id=<?= $_GET['curso'] ?>" class="btn btn-primary">Voltar para o Curso</a>
+</div>

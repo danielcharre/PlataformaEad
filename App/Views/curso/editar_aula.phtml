@@ -1,0 +1,20 @@
+<h2>Editar Aula</h2>
+
+<form method="post" action="/admin/curso/aula/atualizar">
+    <input type="hidden" name="id" value="<?= $this->view->aula['id'] ?>">
+    <input type="hidden" name="id_curso" value="<?= $this->view->curso_id ?>">
+
+    <label>Título:</label><br>
+    <input type="text" name="titulo" value="<?= $this->view->aula['titulo'] ?>" required><br><br>
+
+    <label>Descrição:</label><br>
+    <textarea name="descricao" required><?= $this->view->aula['descricao'] ?></textarea><br><br>
+
+    <label>URL do vídeo:</label><br>
+    <input type="text" name="video_url" value="<?= $this->view->aula['video_url'] ?>"><br><br>
+
+    <label>Ordem:</label><br>
+    <input type="number" name="ordem" value="<?= $this->view->aula['ordem'] ?>"><br><br>
+
+    <button type="submit">Salvar Alterações</button>
+</form>
