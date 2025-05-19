@@ -89,5 +89,19 @@
             $stmt->execute();
         }
         
-
+        public function excluir() {
+            // Excluir aulas vinculadas ao curso
+            $queryAulas = "DELETE FROM aulas WHERE id_curso = :id";
+            $stmtAulas = $this->db->prepare($queryAulas);
+            $stmtAulas->bindValue(':id', $this->__get('id'));
+            $stmtAulas->execute();
+        
+            // Excluir o curso
+            $queryCurso = "DELETE FROM cursos WHERE id = :id";
+            $stmtCurso = $this->db->prepare($queryCurso);
+            $stmtCurso->bindValue(':id', $this->__get('id'));
+            $stmtCurso->execute();
+        }
+        
+        
     }

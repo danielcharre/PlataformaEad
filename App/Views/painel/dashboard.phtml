@@ -41,6 +41,10 @@
                             <a href="/admin/curso/editar?id=<?= $curso['id'] ?>">
                                 <button style="padding: 5px 10px;">Editar Curso</button>
                             </a>
+                            <a href="/admin/curso/excluir?id=<?= $curso['id'] ?>"
+                                onclick="return confirm('Tem certeza que deseja excluir este curso e todas as aulas dele?')">
+                                <button style="padding: 5px 10px; background: #c00; color: white;">Excluir Curso</button>
+                            </a>
 
                         </li>
                     <?php endforeach; ?>

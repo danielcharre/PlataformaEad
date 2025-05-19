@@ -209,5 +209,16 @@ class CursoController extends Action {
         header('Location: /painel/cursos');
     }
     
+
+    public function excluirCurso() {
+        $this->verificarAdmin();
+    
+        $curso = Container::getModel('Cursos');
+        $curso->__set('id', $_GET['id']);
+        $curso->excluir();
+    
+        header('Location: /painel/cursos');
+    }
+    
     
 }

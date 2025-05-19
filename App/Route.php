@@ -159,6 +159,12 @@
                 'action' => 'atualizarCurso'
             ];
             
+            $routes['admin_excluir_curso'] = [
+                'route' => '/admin/curso/excluir',
+                'controller' => 'CursoController',
+                'action' => 'excluirCurso'
+            ];
+            
 
 
             $this->setRoutes($routes); 
