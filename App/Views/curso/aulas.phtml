@@ -5,6 +5,14 @@
     <div style="background: #4caf50; width: <?= $this->view->progresso ?>%; height: 100%; border-radius: 5px;"></div>
 </div>
 
+<?php if ($this->view->progresso == 100): ?>
+    <a href="/painel/certificado?id=<?= $this->view->curso_id ?>" target="_blank">
+        <button style="margin-bottom: 20px;">📄 Baixar Certificado</button>
+    </a>
+<?php endif; ?>
+
+
+
 <?php if (empty($this->view->aulas)): ?>
     <p>Este curso ainda não possui aulas cadastradas.</p>
 <?php else: ?>

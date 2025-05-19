@@ -165,7 +165,12 @@
                 'action' => 'excluirCurso'
             ];
             
-
+            $routes['certificado'] = [
+                'route' => '/painel/certificado',
+                'controller' => 'CursoController',
+                'action' => 'gerarCertificado'
+            ];
+            
 
             $this->setRoutes($routes); 
         }

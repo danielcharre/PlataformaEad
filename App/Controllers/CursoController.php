@@ -5,6 +5,9 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\model\Container;
 
+use Dompdf\Dompdf;
+use Dompdf\Options; 
+
 class CursoController extends Action {
 
     public function index() {
@@ -220,5 +223,52 @@ class CursoController extends Action {
         header('Location: /painel/cursos');
     }
     
-    
+ 
+
+    public function gerarCertificado() {
+        $this->verificarLogin();
+
+        $id_curso = $_GET['id'];
+        $id_aluno = $_SESSION['id'];
+
+        $curso = Container::getModel('Cursos');
+        $matriculado = $curso->listarCursosMatriculados($id_aluno);
+        $matriculado_ids = array_column($matriculado, 'id');
+
+        if (!in_array($id_curso, $matriculado_ids)) {
+            header('Location: /painel/meuscursos');
+            exit;
+        }
+
+        $aula = Container::getModel('Aula');
+        $progresso = $aula->calcularProgresso($id_curso, $id_aluno);
+
+        if ($progresso < 100) {
+            echo "Certificado disponível apenas com 100% de conclusão.";
+            exit;
+        }
+
+        // Dados do certificado
+        $nome = $_SESSION['nome'];
+        $curso_info = $curso->getCursoPorId($id_curso);
+        $titulo_curso = $curso_info['titulo'];
+        $data = date('d/m/Y');
+
+        // HTML do certificado
+        $html = "
+        <h1 style='text-align:center;'>Certificado de Conclusão</h1>
+        <p style='text-align:center;'>Certificamos que <strong>$nome</strong> concluiu o curso</p>
+        <h2 style='text-align:center;'>$titulo_curso</h2>
+        <p style='text-align:center;'>com 100% de aproveitamento em $data</p>
+        ";
+
+        // Gerar PDF
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $dompdf->stream("certificado-$titulo_curso.pdf", ["Attachment" => false]);
+    }
+
 }
