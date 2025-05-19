@@ -35,15 +35,7 @@ CREATE TABLE aulas (
     FOREIGN KEY (id_curso) REFERENCES cursos(id)
 );
 
-CREATE TABLE aulas_vistas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_aluno INT NOT NULL,
-    id_aula INT NOT NULL,
-    visto_em DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (id_aluno, id_aula),
-    FOREIGN KEY (id_aluno) REFERENCES alunos(id),
-    FOREIGN KEY (id_aula) REFERENCES aulas(id)
-);
+
 
 CREATE TABLE progresso_aula (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -107,16 +99,6 @@ CREATE TABLE aulas (
     FOREIGN KEY (id_curso) REFERENCES cursos(id)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
--- Tabela de aulas vistas
-CREATE TABLE aulas_vistas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_aluno INT NOT NULL,
-    id_aula INT NOT NULL,
-    visto_em DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (id_aluno, id_aula),
-    FOREIGN KEY (id_aluno) REFERENCES alunos(id),
-    FOREIGN KEY (id_aula) REFERENCES aulas(id)
-) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- Tabela de progresso da aula
 CREATE TABLE progresso_aula (
@@ -128,3 +110,15 @@ CREATE TABLE progresso_aula (
     FOREIGN KEY (id_aluno) REFERENCES alunos(id),
     FOREIGN KEY (id_aula) REFERENCES aulas(id)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+INSERT INTO `cursos` (`id`, `titulo`, `descricao`, `criado_em`) VALUES (NULL, 'PHP do zero ao avançado', 'Você irá aprender tudo sobre PHP do zero até se tornar um profissional', current_timestamp());
+
+INSERT INTO `cursos` (`id`, `titulo`, `descricao`, `criado_em`) VALUES (NULL, 'Javascript do zero ao avançado', 'Você irá aprender tudo sobre Javascript do zero até se tornar um profissional', current_timestamp());
+
+INSERT INTO `cursos` (`id`, `titulo`, `descricao`, `criado_em`) VALUES (NULL, 'C# do zero ao avançado', 'Você irá aprender tudo sobre C# do zero até se tornar um profissional', current_timestamp());
+
+INSERT INTO `cursos` (`id`, `titulo`, `descricao`, `criado_em`) VALUES (NULL, 'Python do zero ao avançado', 'Você irá aprender tudo sobre Python do zero até se tornar um profissional', current_timestamp());
+
+INSERT INTO `cursos` (`id`, `titulo`, `descricao`, `criado_em`) VALUES (NULL, 'HTML5 do zero ao avançado', 'Você irá aprender tudo sobre HTML5 do zero até se tornar um profissional', current_timestamp());
+
+INSERT INTO `cursos` (`id`, `titulo`, `descricao`, `criado_em`) VALUES (NULL, 'CSS3 do zero ao avançado', 'Você irá aprender tudo sobre CSS3 do zero até se tornar um profissional', current_timestamp());

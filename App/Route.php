@@ -140,6 +140,12 @@
             ];
             
 
+            $routes['admin_excluir_aula'] = [
+                'route' => '/admin/curso/aula/excluir',
+                'controller' => 'CursoController',
+                'action' => 'excluirAula'
+            ];
+
             $this->setRoutes($routes); 
         }
 

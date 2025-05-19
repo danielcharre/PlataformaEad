@@ -120,6 +120,12 @@
         }
         
         
+        public function excluir() {
+            $query = "DELETE FROM aulas WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id', $this->__get('id'));
+            $stmt->execute();
+        }
         
         
     }

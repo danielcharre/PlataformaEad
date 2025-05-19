@@ -13,6 +13,12 @@
             <a href="/admin/curso/aula/editar?id=<?= $aula['id'] ?>&curso=<?= $this->view->curso_id ?>">
                 <button style="margin-top: 5px;">Editar</button>
             </a>
+
+            <a href="/admin/curso/aula/excluir?id=<?= $aula['id'] ?>&curso=<?= $this->view->curso_id ?>" 
+                onclick="return confirm('Tem certeza que deseja excluir esta aula?')">
+                <button style="margin-left: 10px; background: #c00; color: white;">Excluir</button>
+            </a>
+
         </li>
     <?php endforeach; ?>
 </ul>

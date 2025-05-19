@@ -178,5 +178,14 @@ class CursoController extends Action {
         header("Location: /admin/curso/aulas?id=" . $_POST['id_curso']);
     }
     
+    public function excluirAula() {
+        $this->verificarAdmin();
+    
+        $aula = Container::getModel('Aula');
+        $aula->__set('id', $_GET['id']);
+        $aula->excluir();
+    
+        header("Location: /admin/curso/aulas?id=" . $_GET['curso']);
+    }
     
 }
