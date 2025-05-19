@@ -146,6 +146,21 @@
                 'action' => 'excluirAula'
             ];
 
+
+            $routes['admin_editar_curso'] = [
+                'route' => '/admin/curso/editar',
+                'controller' => 'CursoController',
+                'action' => 'editarCurso'
+            ];
+            
+            $routes['admin_atualizar_curso'] = [
+                'route' => '/admin/curso/atualizar',
+                'controller' => 'CursoController',
+                'action' => 'atualizarCurso'
+            ];
+            
+
+
             $this->setRoutes($routes); 
         }
 

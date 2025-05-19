@@ -1,0 +1,13 @@
+<h2>Editar Curso</h2>
+
+<form method="post" action="/admin/curso/atualizar">
+    <input type="hidden" name="id" value="<?= $this->view->curso['id'] ?>">
+
+    <label>Título:</label><br>
+    <input type="text" name="titulo" value="<?= $this->view->curso['titulo'] ?>" required><br><br>
+
+    <label>Descrição:</label><br>
+    <textarea name="descricao" required><?= $this->view->curso['descricao'] ?></textarea><br><br>
+
+    <button type="submit">Salvar Alterações</button>
+</form>

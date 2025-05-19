@@ -72,4 +72,22 @@
         }
         
 
+        public function getCursoPorId($id) {
+            $query = "SELECT * FROM cursos WHERE id = :id LIMIT 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+        
+        public function atualizar() {
+            $query = "UPDATE cursos SET titulo = :titulo, descricao = :descricao WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id', $this->__get('id'));
+            $stmt->bindValue(':titulo', $this->__get('titulo'));
+            $stmt->bindValue(':descricao', $this->__get('descricao'));
+            $stmt->execute();
+        }
+        
+
     }

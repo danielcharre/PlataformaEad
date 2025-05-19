@@ -187,5 +187,27 @@ class CursoController extends Action {
     
         header("Location: /admin/curso/aulas?id=" . $_GET['curso']);
     }
+
+    public function editarCurso() {
+        $this->verificarAdmin();
+    
+        $curso = Container::getModel('Cursos');
+        $this->view->curso = $curso->getCursoPorId($_GET['id']);
+    
+        $this->render('editar_curso');
+    }
+    
+    public function atualizarCurso() {
+        $this->verificarAdmin();
+    
+        $curso = Container::getModel('Cursos');
+        $curso->__set('id', $_POST['id']);
+        $curso->__set('titulo', $_POST['titulo']);
+        $curso->__set('descricao', $_POST['descricao']);
+        $curso->atualizar();
+    
+        header('Location: /painel/cursos');
+    }
+    
     
 }
