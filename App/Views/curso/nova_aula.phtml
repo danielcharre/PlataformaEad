@@ -9,11 +9,12 @@
     <label>Descrição:</label><br>
     <textarea name="descricao" required></textarea><br><br>
 
-    <label>URL do vídeo (embed):</label><br>
-    <input type="text" name="video_url"><br><br>
+    <label>Link do vídeo (YouTube):</label><br>
+    <input type="text" name="video_url" required><br>
+    <small style="color: gray;">Cole o link completo do YouTube (ex: https://www.youtube.com/watch?v=...) — o sistema converterá automaticamente</small><br><br>
 
     <label>Ordem:</label><br>
-    <input type="number" name="ordem" value="1"><br><br>
+    <input type="number" name="ordem" value="0"><br><br>
 
     <button type="submit">Salvar Aula</button>
 </form>

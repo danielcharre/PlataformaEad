@@ -10,8 +10,9 @@
     <label>Descrição:</label><br>
     <textarea name="descricao" required><?= $this->view->aula['descricao'] ?></textarea><br><br>
 
-    <label>URL do vídeo:</label><br>
-    <input type="text" name="video_url" value="<?= $this->view->aula['video_url'] ?>"><br><br>
+    <label>Link do vídeo (YouTube):</label><br>
+    <input type="text" name="video_url" value="<?= $this->view->aula['video_url'] ?>" required><br>
+    <small style="color: gray;">Cole o link completo do YouTube — ele será convertido automaticamente</small><br><br>
 
     <label>Ordem:</label><br>
     <input type="number" name="ordem" value="<?= $this->view->aula['ordem'] ?>"><br><br>

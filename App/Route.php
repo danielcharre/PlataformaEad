@@ -81,16 +81,11 @@
                 'action' => 'marcarVisto'
             ];
 
-            $routes['assistir'] = [
-                'route' => '/painel/assistir',
-                'controller' => 'CursoController',
-                'action' => 'assistir'
-            ];
 
             $routes['assistir_aula'] = [
                 'route' => '/painel/assistir',
                 'controller' => 'CursoController',
-                'action' => 'assistirAula'
+                'action' => 'assistirAula' // ✅ CORRETO
             ];
 
             # ROTAS ADMIN

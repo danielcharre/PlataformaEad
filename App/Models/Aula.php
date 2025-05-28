@@ -42,19 +42,20 @@
 
 
         public function listarAulasVistas($id_aluno, $id_curso) {
-
             $query = "
-                        SELECT id_aula FROM aulas_vistas 
-                        WHERE id_aluno = :id_aluno AND id_aula IN (
-                            SELECT id FROM aulas WHERE id_curso = :id_curso
-                        )
-                    ";
+                SELECT pa.id_aula
+                FROM progresso_aula pa
+                JOIN aulas a ON pa.id_aula = a.id
+                WHERE pa.id_aluno = :id_aluno
+                  AND a.id_curso = :id_curso
+            ";
             $stmt = $this->db->prepare($query);
-            $stmt->bindValue(":id_aluno", $id_aluno);
-            $stmt->bindValue(":id_curso", $id_curso);
+            $stmt->bindValue(':id_aluno', $id_aluno);
+            $stmt->bindValue(':id_curso', $id_curso);
             $stmt->execute();
-            return $stmt->fetchAll(\PDO::FETCH_COLUMN); # Retorna um array de ids
+            return $stmt->fetchAll(\PDO::FETCH_COLUMN); // retorna array de IDs
         }
+        
 
 
         public function marcarComoAssistida($id_aluno, $id_aula) {
@@ -126,6 +127,17 @@
             $stmt->bindValue(':id', $this->__get('id'));
             $stmt->execute();
         }
+
+        public static function converterParaEmbed($url) {
+            if (strpos($url, 'watch?v=') !== false) {
+                return str_replace('watch?v=', 'embed/', $url);
+            } elseif (strpos($url, 'youtu.be/') !== false) {
+                $id = substr(parse_url($url, PHP_URL_PATH), 1);
+                return 'https://www.youtube.com/embed/' . $id;
+            }
+            return $url; // caso já esteja no formato embed
+        }
+        
         
         
     }

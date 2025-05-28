@@ -1,37 +1,73 @@
-<h2>Aulas do Curso</h2>
-
-<p>Progresso: <?= $this->view->progresso ?>%</p>
-<div style="background: #ddd; width: 100%; height: 20px; border-radius: 5px; margin-bottom: 20px;">
-    <div style="background: #4caf50; width: <?= $this->view->progresso ?>%; height: 100%; border-radius: 5px;"></div>
-</div>
-
-<?php if ($this->view->progresso == 100): ?>
-    <a href="/painel/certificado?id=<?= $this->view->curso_id ?>" target="_blank">
-        <button style="margin-bottom: 20px;">📄 Baixar Certificado</button>
-    </a>
-<?php endif; ?>
-
-
+<h2 style="text-align: center; margin-top: 40px;"><?= $this->view->curso_titulo ?? 'Aulas do Curso' ?></h2>
 
 <?php if (empty($this->view->aulas)): ?>
-    <p>Este curso ainda não possui aulas cadastradas.</p>
+    <p style="text-align: center; margin-top: 20px;">Este curso ainda não possui aulas cadastradas.</p>
 <?php else: ?>
-    <div style="display: flex; flex-direction: column; gap: 15px;">
-        <?php foreach ($this->view->aulas as $aula): ?>
-            <div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background: #fff;">
-                <h3>
-                    <?= $aula['titulo'] ?>
-                    <?php if (in_array($aula['id'], $this->view->aulas_vistas)): ?>
-                        <span style="color: green; font-size: 14px;">✅ Aula assistida</span>
-                    <?php endif; ?>
-                </h3>
-                <p><?= $aula['descricao'] ?></p>
 
-                <?php if (!empty($aula['video_url'])): ?>
-                    <a href="<?= $aula['video_url'] ?>" target="_blank" style="margin-right: 10px;">▶ Assistir vídeo</a>
-                    <a href="/painel/assistir?id=<?= $aula['id'] ?>&curso=<?= $this->view->curso_id ?>" style="color: #28a745;">Marcar como assistida</a>
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <!-- CONTAINER CENTRALIZADO -->
+    <div style="width: 100%; max-width: 800px; margin: 0 auto;">
+
+        <!-- PLAYER -->
+        <div style="width: 100%; margin-bottom: 20px;">
+            <iframe id="videoPlayer" width="100%" height="450" style="border: none; border-radius: 8px;"
+                    src="<?= $this->view->aulas[0]['video_url'] ?>"
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- PROGRESSO -->
+        <p>Progresso: <?= $this->view->progresso ?>%</p>
+        <div style="background: #ddd; width: 100%; height: 20px; border-radius: 5px; margin-bottom: 20px;">
+            <div style="background: #4caf50; width: <?= $this->view->progresso ?>%; height: 100%; border-radius: 5px;"></div>
+        </div>
+
+        <!-- LISTA DE AULAS -->
+        <ul style="list-style: none; padding: 0;">
+            <?php foreach ($this->view->aulas as $aula): ?>
+                <li style="margin-bottom: 15px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
+
+                    <!-- TÍTULO COM ✅ SE JÁ ASSISTIDA -->
+                    <strong>
+                        <?= $aula['titulo'] ?>
+                        <?php if (in_array($aula['id'], $this->view->aulas_vistas)): ?>
+                            ✅
+                        <?php endif; ?>
+                    </strong><br>
+
+                    <small><?= $aula['descricao'] ?></small><br>
+
+                    <?php if (!empty($aula['video_url'])): ?>
+                        <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button type="button" onclick="trocarVideo('<?= $aula['video_url'] ?>')" style="padding: 5px 10px;">
+                                ▶️ Assistir aqui
+                            </button>
+
+                            <form method="post" action="/painel/assistir" style="display: inline;">
+                                <input type="hidden" name="id" value="<?= $aula['id'] ?>">
+                                <input type="hidden" name="curso" value="<?= $this->view->curso_id ?>">
+                                <button type="submit" style="padding: 5px 10px;">✅ Marcar como assistida</button>
+                            </form>
+                        </div>
+                    <?php endif; ?>
+
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+        <!-- CERTIFICADO -->
+        <?php if ($this->view->progresso == 100): ?>
+            <a href="/painel/certificado?id=<?= $this->view->curso_id ?>" target="_blank">
+                <button style="margin-top: 30px;">📄 Baixar Certificado</button>
+            </a>
+        <?php endif; ?>
+
+    </div> <!-- FIM CONTAINER CENTRALIZADO -->
+
 <?php endif; ?>
+
+<script>
+    function trocarVideo(url) {
+        const player = document.getElementById('videoPlayer');
+        player.src = url;
+    }
+</script>
